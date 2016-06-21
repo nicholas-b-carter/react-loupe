@@ -1,14 +1,14 @@
 {
-  "name": "image-magnifier",
+  "name": "loupe",
   "version": "1.0.0",
-  "description": "React component to turn ordinary images into images with magnifyer glass overlay. Does the image contain small text?",
+  "description": "React component to turn ordinary images into images with magnifyer glass overlay.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint -c .eslintrc --cache ."
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/walkerrandolphsmith/image-magnifier.git"
+    "url": "https://github.com/walkerrandolphsmith/loupe.git"
   },
   "keywords": [],
   "author": "walkerrandolphsmith@gmail.com",
@@ -17,9 +17,9 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/walkerrandolphsmith/image-magnifier/issues"
+    "url": "https://github.com/walkerrandolphsmith/loupe/issues"
   },
-  "homepage": "https://github.com/walkerrandolphsmith/image-magnifier",
+  "homepage": "https://github.com/walkerrandolphsmith/loupe",
   "devDependencies": {
     "babel-eslint": "^6.0.0-beta.6",
     "eslint": "^2.5.1",

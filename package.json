@@ -4,7 +4,8 @@
   "description": "React component to turn ordinary images into images with magnifyer glass overlay.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint -c .eslintrc --cache ."
+    "lint": "eslint -c .eslintrc --cache .",
+    "storybook": "start-storybook -p 9001"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,30 @@
   },
   "homepage": "https://github.com/walkerrandolphsmith/loupe",
   "devDependencies": {
+    "@kadira/storybook": "^1.35.1",
+    "babel-cli": "^6.10.1",
     "babel-eslint": "^6.0.0-beta.6",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "babel-preset-stage-3": "^6.5.0",
     "eslint": "^2.5.1",
     "eslint-plugin-react": "^4.2.3"
+  },
+  "dependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  },
+  "babel": {
+    "presets": [
+      "stage-0",
+      "es2015",
+      "react"
+    ]
+  },
+  "engines": {
+    "node": "4.1.1"
   }
 }

@@ -4,6 +4,7 @@
   "description": "React component to turn ordinary images into images with magnifyer glass overlay.",
   "main": "index.js",
   "scripts": {
+    "start": "npm run storybook",
     "lint": "eslint -c .eslintrc --cache .",
     "storybook": "start-storybook -p 9001"
   },

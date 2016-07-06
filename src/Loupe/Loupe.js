@@ -20,7 +20,7 @@ export default class Loupe extends Component {
         this.state = {
             isShown: props.isShown,
             big: { top: 0, left: 0 },
-            small: { top: 0, left: 0 }
+            loupe: { top: 0, left: 0 }
         }
     }
 
@@ -39,45 +39,46 @@ export default class Loupe extends Component {
     }
 
     onMouseMove(event) {
-        let { width, height } = this.props;
-        width = width / 2;
-        height = height / 2;
+        const width = this.props.width / 2;
+        const height = this.props.height / 2;
         const x = event.pageX;
         const y = event.pageY;
-        const smallElm = event.target;
-        const bigElm = smallElm.children[0];
+        let containerElm = event.target;
+        if(!containerElm.className.includes('loupe-container')) {
+            containerElm = containerElm.parentElement.parentElement;
+        }
+        const imgElm = containerElm.children[0];
 
-        const smallWidth = smallElm.offsetWidth;
-        const smallHeight = smallElm.offsetHeight;
+        const container = containerElm.getBoundingClientRect();
+        const { left, top } = container;
 
-        const big = bigElm.getBoundingClientRect();
-        const small = smallElm.getBoundingClientRect();
-
-        const bl = -(((x - small.left) / smallWidth) * big.width - width) | 0;
-        const bt = -(((y - small.top) / smallHeight) * big.height - height) | 0;
-
-        const sl = x - width;
-        const st = y - height;
+        const img = imgElm.getBoundingClientRect();
 
         const shouldHide = (
-            x > smallWidth + small.left + 10
-            || x < small.left - 10
-            || y > smallHeight + small.top + 10
-            || y < small.top - 10
+            x > container.width + left + 10
+            || x < left - 10
+            || y > container.height + top + 10
+            || y < top - 10
         );
 
         this.setState({
             isShown: shouldHide ? false : true,
-            small: { top: st, left: sl },
-            big: { top: bt, left: bl }
+            loupe: {
+                top: y - height,
+                left: x - width
+            },
+            big: {
+                top: -(((y - top) / container.height) * img.height - height),
+                left: -(((x - left) / container.width) * img.width - width)
+            }
         });
     }
 
     render() {
         const { image, classNames, width, height } = this.props;
-        const { isShown, small, big } = this.state;
+        const { isShown, loupe, big } = this.state;
 
-        const containerClassNames = `container ${classNames.join(' ')}`;
+        const containerClassNames = `loupe-container ${classNames.join(' ')}`;
 
         const containerStyle = {
             position: 'relative',
@@ -89,12 +90,12 @@ export default class Loupe extends Component {
             backgroundSize: 'contain'
         };
 
-        const bigStyle = {
+        const loupeStyle = {
             position: 'absolute',
             overflow: 'hidden',
             zIndex: '2',
-            top: big.top,
-            left: big.left,
+            top: loupe.top,
+            left: loupe.left,
             width: `${width}px`,
             height: `${height}px`,
             display: isShown ? 'block' : 'none',
@@ -102,11 +103,11 @@ export default class Loupe extends Component {
             border: '1px solid black'
         };
 
-        const smallStyle = {
+        const imageStyle = {
             position: 'absolute',
             zIndex: '2',
-            top: small.top,
-            left: small.left
+            top: big.top,
+            left: big.left
         };
 
         return (
@@ -115,8 +116,8 @@ export default class Loupe extends Component {
                  onMouseEnter={this.onMouseEnter.bind(this)}
                  onMouseLeave={this.onMouseLeave.bind(this)}
                  onMouseMove={this.onMouseMove.bind(this)}>
-               <div className="big" style={bigStyle}>
-                  <img className="small" style={smallStyle} src={image} />
+               <div style={loupeStyle}>
+                  <img style={imageStyle} src={image} />
                </div>
             </div>
         );

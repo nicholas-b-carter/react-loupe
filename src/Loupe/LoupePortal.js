@@ -20,20 +20,25 @@ export default class LoupePortal extends Component {
     };
     
     render() {
-        const { image, width, height, isShown, loupe, big } = this.props;
+        const { image, width, height, isShown, loupe, big, loupeStyles } = this.props;
 
-        const loupeStyle = {
+        const requiredLoupeStyles = {
             pointerEvents: 'none',
             position: 'absolute',
             overflow: 'hidden',
-            zIndex: '2',
             top: loupe.top,
             left: loupe.left,
             width: `${width}px`,
             height: `${height}px`,
-            display: isShown ? 'block' : 'none',
-            border: '1px solid black'
+            display: isShown ? 'block' : 'none'
         };
+
+        const overriddenStyles = Object.assign({
+            zIndex: '2',
+            border: '1px solid black'
+        }, loupeStyles);
+
+        const finalStyles = Object.assign(overriddenStyles, requiredLoupeStyles);
 
         const imageStyle = {
             position: 'absolute',
@@ -43,7 +48,7 @@ export default class LoupePortal extends Component {
         };
 
         return (
-            <div style={loupeStyle} >
+            <div style={finalStyles} >
                 <img style={imageStyle} src={image} />
             </div>
         );

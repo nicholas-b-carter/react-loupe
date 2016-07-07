@@ -1,4 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import {
+    unstable_renderSubtreeIntoContainer as renderSubtreeIntoContainer
+} from 'react-dom';
+import LoupePortal from './LoupePortal';
 
 export default class Loupe extends Component {
     static propTypes = {
@@ -18,10 +22,18 @@ export default class Loupe extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
+            mountNode: null,
             isShown: props.isShown,
-            big: { top: 0, left: 0 },
-            loupe: { top: 0, left: 0 }
+            loupe: { top: 0, left: 0 },
+            big: { top: 0, left: 0 }
         }
+    }
+
+    componentWillMount() {
+        const mountNode = document.createElement('div');
+        mountNode.className  = 'ReactLoupe';
+        document.body.appendChild(mountNode);
+        this.setState({ mountNode: mountNode });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -30,29 +42,20 @@ export default class Loupe extends Component {
         }
     }
 
-    onMouseEnter(event) {
-        this.setState({ isShown: true });
-    }
-
-    onMouseLeave(event) {
-        this.setState({ isShown: false });
-    }
-
     onMouseMove(event) {
+        
         const width = this.props.width / 2;
         const height = this.props.height / 2;
         const x = event.pageX;
         const y = event.pageY;
-        let containerElm = event.target;
-        if(!containerElm.className.includes('loupe-container')) {
-            containerElm = containerElm.parentElement.parentElement;
-        }
-        const imgElm = containerElm.children[0];
 
-        const container = containerElm.getBoundingClientRect();
-        const { left, top } = container;
-
+        const imgElm = this.state.mountNode.children[0].children[0];
         const img = imgElm.getBoundingClientRect();
+
+        console.log(imgElm, img);
+
+        const container = this.refs.container.getBoundingClientRect();
+        const { left, top } = container;
 
         const shouldHide = (
             x > container.width + left + 10
@@ -63,6 +66,8 @@ export default class Loupe extends Component {
 
         this.setState({
             isShown: shouldHide ? false : true,
+            container: container,
+            img: img,
             loupe: {
                 top: y - height,
                 left: x - width
@@ -74,13 +79,18 @@ export default class Loupe extends Component {
         });
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        const props = Object.assign({}, nextProps, nextState);
+        renderSubtreeIntoContainer(this, (<LoupePortal {...props} />), this.state.mountNode);
+    }
+
     render() {
-        const { image, classNames, width, height } = this.props;
-        const { isShown, loupe, big } = this.state;
+        const { image, classNames } = this.props;
 
         const containerClassNames = `loupe-container ${classNames.join(' ')}`;
 
         const containerStyle = {
+            display: 'inline-block',
             position: 'relative',
             zIndex: '1',
             height: '200px',
@@ -90,35 +100,11 @@ export default class Loupe extends Component {
             backgroundSize: 'contain'
         };
 
-        const loupeStyle = {
-            position: 'absolute',
-            overflow: 'hidden',
-            zIndex: '2',
-            top: loupe.top,
-            left: loupe.left,
-            width: `${width}px`,
-            height: `${height}px`,
-            display: isShown ? 'block' : 'none',
-            borderRadius: '50%',
-            border: '1px solid black'
-        };
-
-        const imageStyle = {
-            position: 'absolute',
-            zIndex: '2',
-            top: big.top,
-            left: big.left
-        };
-
         return (
             <div className={containerClassNames}
                  style={containerStyle}
-                 onMouseEnter={this.onMouseEnter.bind(this)}
-                 onMouseLeave={this.onMouseLeave.bind(this)}
+                 ref="container"
                  onMouseMove={this.onMouseMove.bind(this)}>
-               <div style={loupeStyle}>
-                  <img style={imageStyle} src={image} />
-               </div>
             </div>
         );
     }

@@ -95,29 +95,34 @@ export default class Loupe extends Component {
     }
 
     render() {
-        const { image, classNames } = this.props;
+        const { image, classNames, styles } = this.props;
 
         const containerClassNames = `loupe-container ${classNames.join(' ')}`;
 
-        const containerStyle = {
+        const requiredStyles = {
             display: 'inline-block',
-            position: 'relative',
-            zIndex: '1',
-            height: '200px',
-            width: '200px',
-            border: '1px solid red',
-            backgroundImage: `url(${image}`,
-            backgroundSize: 'contain'
+            position: 'relative'
         };
 
+        const overriddenStyles = Object.assign({
+            zIndex: '1',
+            width: '100px',
+            height: '100px'
+        }, styles);
+
+        const containerStyles = Object.assign(overriddenStyles, requiredStyles);
+
         return (
-            <div className={containerClassNames}
-                 style={containerStyle}
+            <img src={image}
+                 width={containerStyles.width}
+                 height={containerStyles.height}
+                 className={containerClassNames}
+                 style={containerStyles}
                  ref="container"
                  onMouseEnter={this.onMouseEnter.bind(this)}
                  onMouseLeave={this.onMouseLeave.bind(this)}
                  onMouseMove={this.onMouseMove.bind(this)}>
-            </div>
+            </img>
         );
     }
 }

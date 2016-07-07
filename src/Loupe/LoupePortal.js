@@ -3,28 +3,27 @@ import React, { Component, PropTypes } from 'react';
 export default class LoupePortal extends Component {
     static propTypes = {
         image: PropTypes.string,
-        container: PropTypes.object,
-        loupe: PropTypes.object
+        width: PropTypes.number,
+        height: PropTypes.number,
+        isShown: PropTypes.bool,
+        loupe: PropTypes.object,
+        big: PropTypes.object
     };
 
     static defaultProps = {
         image: '',
-        container: {},
-        loupe: {}
+        width: 100,
+        height: 100,
+        isShown: false,
+        loupe: {},
+        big: {}
     };
-
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            big: { top: 0, left: 0 }
-        }
-    }
     
     render() {
         const { image, width, height, isShown, loupe, big } = this.props;
 
         const loupeStyle = {
-            pointerEvents: "none",
+            pointerEvents: 'none',
             position: 'absolute',
             overflow: 'hidden',
             zIndex: '2',

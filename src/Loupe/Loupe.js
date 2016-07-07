@@ -56,7 +56,6 @@ export default class Loupe extends Component {
     }
 
     onMouseMove(event) {
-        
         const width = this.props.width / 2;
         const height = this.props.height / 2;
         const x = event.pageX;
@@ -64,8 +63,6 @@ export default class Loupe extends Component {
 
         const imgElm = this.state.mountNode.children[0].children[0];
         const img = imgElm.getBoundingClientRect();
-
-        console.log(imgElm, img);
 
         const container = this.refs.container.getBoundingClientRect();
         const { left, top } = container;

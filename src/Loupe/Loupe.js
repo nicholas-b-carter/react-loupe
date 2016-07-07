@@ -76,8 +76,6 @@ export default class Loupe extends Component {
 
         this.setState({
             isShown: shouldHide ? false : true,
-            container: container,
-            img: img,
             loupe: {
                 top: y - height,
                 left: x - width

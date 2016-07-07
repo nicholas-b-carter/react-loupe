@@ -24,6 +24,7 @@ export default class LoupePortal extends Component {
         const { image, width, height, isShown, loupe, big } = this.props;
 
         const loupeStyle = {
+            pointerEvents: "none",
             position: 'absolute',
             overflow: 'hidden',
             zIndex: '2',

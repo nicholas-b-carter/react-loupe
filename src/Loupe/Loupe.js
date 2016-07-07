@@ -42,6 +42,14 @@ export default class Loupe extends Component {
         }
     }
 
+    onMouseEnter(event) {
+        this.setState({ isShown: true });
+    }
+
+    onMouseLeave(event) {
+        this.setState({ isShown: false });
+    }
+
     onMouseMove(event) {
         
         const width = this.props.width / 2;
@@ -104,6 +112,8 @@ export default class Loupe extends Component {
             <div className={containerClassNames}
                  style={containerStyle}
                  ref="container"
+                 onMouseEnter={this.onMouseEnter.bind(this)}
+                 onMouseLeave={this.onMouseLeave.bind(this)}
                  onMouseMove={this.onMouseMove.bind(this)}>
             </div>
         );

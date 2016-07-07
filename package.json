@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run storybook",
     "lint": "eslint -c .eslintrc --cache .",
-    "storybook": "start-storybook -p 9001"
+    "storybook": "start-storybook -p 3000"
   },
   "repository": {
     "type": "git",

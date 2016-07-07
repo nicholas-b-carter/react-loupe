@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run storybook",
+    "build": "babel src --ignore Stories.js,*.spec.js -d ./dist",
     "lint": "eslint -c .eslintrc --cache .",
     "storybook": "start-storybook -p 3000"
   },
@@ -41,9 +42,12 @@
   },
   "babel": {
     "presets": [
-      "stage-0",
       "es2015",
-      "react"
+      "react",
+      "stage-3",
+      "stage-2",
+      "stage-1",
+      "stage-0"
     ]
   },
   "engines": {

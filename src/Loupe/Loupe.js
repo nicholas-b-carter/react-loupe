@@ -64,14 +64,13 @@ export default class Loupe extends Component {
         const imgElm = this.state.mountNode.children[0].children[0];
         const img = imgElm.getBoundingClientRect();
 
-        const container = this.refs.container.getBoundingClientRect();
-        const { left, top } = container;
+        const rect = this.refs.container.getBoundingClientRect();
 
         const shouldHide = (
-            x > container.width + left + 10
-            || x < left - 10
-            || y > container.height + top + 10
-            || y < top - 10
+            x > rect.width + rect.left + 10
+            || x < rect.left - 10
+            || y > rect.height + rect.top + 10
+            || y < rect.top - 10
         );
 
         this.setState({
@@ -81,8 +80,8 @@ export default class Loupe extends Component {
                 left: x - width
             },
             big: {
-                top: -(((y - top) / container.height) * img.height - height),
-                left: -(((x - left) / container.width) * img.width - width)
+                top: -(((y - rect.top) / rect.height) * img.height - height),
+                left: -(((x - rect.left) / rect.width) * img.width - width)
             }
         });
     }

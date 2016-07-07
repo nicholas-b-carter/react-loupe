@@ -107,14 +107,14 @@ export default class Loupe extends Component {
             height: '100px'
         }, styles);
 
-        const containerStyles = Object.assign(overriddenStyles, requiredStyles);
+        const finalStyles = Object.assign(overriddenStyles, requiredStyles);
 
         return (
             <img src={image}
-                 width={containerStyles.width}
-                 height={containerStyles.height}
+                 width={finalStyles.width}
+                 height={finalStyles.height}
                  className={containerClassNames}
-                 style={containerStyles}
+                 style={finalStyles}
                  ref="container"
                  onMouseEnter={this.onMouseEnter.bind(this)}
                  onMouseLeave={this.onMouseLeave.bind(this)}

@@ -20,7 +20,9 @@ export default class LoupePortal extends Component {
     };
     
     render() {
-        const { image, width, height, isShown, loupe, big, loupeStyles } = this.props;
+        const { image, width, height, isShown, loupe, big, loupeClassNames, loupeStyles } = this.props;
+
+        const classNames = `loupe ${loupeClassNames.join(' ')}`;
 
         const requiredLoupeStyles = {
             pointerEvents: 'none',
@@ -48,7 +50,7 @@ export default class LoupePortal extends Component {
         };
 
         return (
-            <div style={finalStyles} >
+            <div className={classNames} style={finalStyles} >
                 <img style={imageStyle} src={image} />
             </div>
         );

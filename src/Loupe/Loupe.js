@@ -7,6 +7,7 @@ import LoupePortal from './LoupePortal';
 export default class Loupe extends Component {
     static propTypes = {
         classNames: PropTypes.arrayOf(PropTypes.string),
+        loupeClassNames: PropTypes.arrayOf(PropTypes.string),
         image: PropTypes.string,
         width: PropTypes.number,
         height: PropTypes.number,
@@ -18,6 +19,7 @@ export default class Loupe extends Component {
     static defaultProps = {
         image: '',
         classNames: [''],
+        loupeClassNames: [''],
         width: 100,
         height: 100,
         isShown: false,

@@ -58,6 +58,11 @@ export default class Loupe extends Component {
         }
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        const props = Object.assign({}, nextProps, nextState);
+        renderSubtreeIntoContainer(this, (<LoupePortal {...props} />), this.state.mountNode);
+    }
+
     onMouseEnter(event) {
         this.setState({ isShown: true });
     }
@@ -95,11 +100,6 @@ export default class Loupe extends Component {
                 left: -(((x - rect.left) / rect.width) * img.width - width)
             }
         });
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        const props = Object.assign({}, nextProps, nextState);
-        renderSubtreeIntoContainer(this, (<LoupePortal {...props} />), this.state.mountNode);
     }
 
     render() {

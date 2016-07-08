@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
-    unstable_renderSubtreeIntoContainer as renderSubtreeIntoContainer
+    unstable_renderSubtreeIntoContainer as renderSubtreeIntoContainer,
+    unmountComponentAtNode
 } from 'react-dom';
 import LoupePortal from './LoupePortal';
 
@@ -41,6 +42,14 @@ export default class Loupe extends Component {
         mountNode.className  = 'ReactLoupe';
         document.body.appendChild(mountNode);
         this.setState({ mountNode: mountNode });
+    }
+
+    componentWillUnmount() {
+        if (this.state.mountNode) {
+            unmountComponentAtNode(this.state.mountNode);
+            this.state.mountNode.parentElement.removeChild(this.state.mountNode);
+            this.setState({ mountNode: null });
+        }
     }
 
     componentWillReceiveProps(nextProps) {

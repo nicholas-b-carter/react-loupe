@@ -1,5 +1,5 @@
 {
-  "name": "loupe",
+  "name": "react-loupe",
   "version": "1.0.0",
   "description": "React component to turn ordinary images into images with magnifyer glass overlay.",
   "main": "index.js",
@@ -11,18 +11,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/walkerrandolphsmith/loupe.git"
+    "url": "https://github.com/walkerrandolphsmith/react-loupe.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "react-loupe",
+    "loupe"
+  ],
   "author": "walkerrandolphsmith@gmail.com",
   "contributors": [
     "walkerrandolphsmith@gmail.com"
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/walkerrandolphsmith/loupe/issues"
+    "url": "https://github.com/walkerrandolphsmith/react-loupe/issues"
   },
-  "homepage": "https://github.com/walkerrandolphsmith/loupe",
+  "homepage": "https://github.com/walkerrandolphsmith/react-loupe",
   "devDependencies": {
     "@kadira/storybook": "^1.35.1",
     "babel-cli": "^6.10.1",

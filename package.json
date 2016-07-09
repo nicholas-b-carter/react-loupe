@@ -1,5 +1,5 @@
 {
-  "name": "react-loupe",
+  "name": "@walkerrandolphsmith/react-loupe",
   "version": "1.0.0",
   "description": "React component to turn ordinary images into images with magnifyer glass overlay.",
   "main": "index.js",

@@ -4,15 +4,11 @@ React component to turn ordinary images into images with magnifyer glass overlay
 
 ## Install
 ```sh
-# coming soon
-npm install walkerandolphsmith/loupe
+npm install @walkerandolphsmith/react-loupe
 ```
-
-## Devlop
 
 ###Build
 `npm run build`
 
 ###Open storybook
 `npm start`
-

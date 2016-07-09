@@ -3,3 +3,4 @@
 .eslintignore
 .eslintrc
 .gitignore
+src/**/Stories.js

@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^16.0.1"
   },
   "babel": {
     "presets": [
